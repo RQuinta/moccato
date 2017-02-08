@@ -11,7 +11,7 @@ gem 'puma', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'has_scope'
-gem 'rails-observers'
+gem 'delayed_job_active_record'
 
 
 group :development, :test do
