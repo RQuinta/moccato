@@ -12,7 +12,7 @@ gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'
 gem 'has_scope'
 gem 'delayed_job_active_record'
-
+gem 'paranoia'
 
 group :development, :test do
   gem 'byebug', platform: :mri

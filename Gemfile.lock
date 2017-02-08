@@ -78,6 +78,8 @@ GEM
     nio4r (1.2.1)
     nokogiri (1.7.0.1)
       mini_portile2 (~> 2.1.0)
+    paranoia (2.2.0)
+      activerecord (>= 4.0, < 5.1)
     puma (3.7.0)
     rack (2.0.1)
     rack-cors (0.4.1)
@@ -158,6 +160,7 @@ DEPENDENCIES
   factory_girl_rails
   has_scope
   listen (~> 3.0.5)
+  paranoia
   puma (~> 3.0)
   rack-cors
   rails (~> 5.0.1)
