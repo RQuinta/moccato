@@ -1,12 +1,14 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update]
 
   def index
     @users = User.all
+    authorize @users
     render json: @users
   end
 
   def show
+    authorize @user
     render json: @user
   end
 
@@ -25,10 +27,6 @@ class UsersController < ApplicationController
     else
       render json: @user.errors, status: :unprocessable_entity
     end
-  end
-
-  def destroy
-    @user.destroy
   end
 
   private

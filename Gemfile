@@ -7,6 +7,7 @@ end
 
 gem 'rails', '~> 5.0.1'
 gem 'sqlite3'
+gem "pundit"
 gem 'puma', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rack-cors'

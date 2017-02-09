@@ -1,5 +1,7 @@
 class ApplicationController < ActionController::API
 
+  include Pundit
+
   include ActionController::HttpAuthentication::Token
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found

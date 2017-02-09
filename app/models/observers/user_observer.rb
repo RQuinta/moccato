@@ -1,7 +1,7 @@
 class UserObserver < ActiveRecord::Observer
 
-  def after_save(user)
-    1
+  def after_create(user)
+      UserNotifier.send_signup_email(user).deliver_later
   end
 
 end
