@@ -2,14 +2,29 @@ class ApplicationController < ActionController::API
 
   include Pundit
 
+  include ActionController::Serialization
+
   include ActionController::HttpAuthentication::Token
 
   rescue_from ActiveRecord::RecordNotFound, with: :not_found
 
+  before_action :authenticate
+
+  protected
+
   def authenticate
-    unless authenticate_with_http_token { |token, options| User.find_by(token: token) }
-      render json: { error: 'Bad Token'}, status: 401
+    authenticate_token || render_unauthorized
+  end
+
+  def authenticate_token
+    authenticate_with_http_token do |token, options|
+      @current_user = User.find_by(api_key: token)
     end
+  end
+
+  def render_unauthorized(realm = "Application")
+    self.headers["WWW-Authenticate"] = %(Token realm="#{realm.gsub(/"/, "")}")
+    render json: 'Bad credentials', status: :unauthorized
   end
 
   def not_found

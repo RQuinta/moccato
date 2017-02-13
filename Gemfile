@@ -14,11 +14,15 @@ gem 'rack-cors'
 gem 'has_scope'
 gem 'delayed_job_active_record'
 gem 'paranoia'
+gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '>= 3.5.0'
   gem 'factory_girl_rails'
+  gem 'shoulda-matchers', '~> 3.1'
+  gem 'database_cleaner'
+  gem 'faker'
 end
 
 group :development do
