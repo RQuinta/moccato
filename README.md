@@ -31,9 +31,8 @@ Comandos:
       rake db:migrate
       rake db:seed
       rails s
-    
     Executar testes automatizados:
-      rspec (relatório disponiel na pasta coverage)
+        rspec (relatório disponiel na pasta coverage)
 
 Link para aplicação no Heoku:
   https://sheltered-stream-82810.herokuapp.com/ (Não retorna nada no /, para saber mais sobre as rotas consulte o routes.rb)
