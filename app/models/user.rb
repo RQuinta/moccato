@@ -9,4 +9,10 @@ class User < ApplicationRecord
   validates :name, presence: true
   validates :email, presence: true, uniqueness: true
 
+  after_create	:send_welcome_mail
+
+  def send_welcome_mail
+    UserNotifier.send_signup_email(self)
+  end
+
 end
