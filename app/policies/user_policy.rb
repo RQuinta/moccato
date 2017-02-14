@@ -15,7 +15,7 @@ class UserPolicy < ApplicationPolicy
   private
 
   def own_user_or_admin?
-    user == resource || admin?
+    user == @record || admin?
   end
 
 end

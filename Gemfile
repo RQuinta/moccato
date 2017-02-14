@@ -17,6 +17,7 @@ gem 'paranoia'
 gem 'active_model_serializers', '~> 0.10.0'
 
 group :development, :test do
+  gem 'pry-byebug'
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '>= 3.5.0'
   gem 'factory_girl_rails'

@@ -27,7 +27,6 @@ RSpec.configuration do |config|
     DatabaseCleaner.strategy = :transaction
   end
 
-  # start the transaction strategy as examples are run
   config.around(:each) do |example|
     DatabaseCleaner.cleaning do
       example.run
