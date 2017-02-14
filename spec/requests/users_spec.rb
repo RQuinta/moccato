@@ -56,4 +56,23 @@ RSpec.describe "Users", type: :request do
     end
   end
 
+  describe 'POST /users' do
+
+    context 'when the request is invalid' do
+      before { post '/users', params:  { user: { email: '1234.@fma.ur' } } }
+
+      it 'returns status code 422' do
+        expect(response).to have_http_status(422)
+      end
+
+    end
+  end
+
+  describe 'DELETE /users/:id' do
+    before { delete "/users/#{user_id}", nil, :authorization => 'Token token=' + admin.token }
+
+    it 'returns status code 204' do
+      expect(response).to have_http_status(204)
+    end
+  end
 end
