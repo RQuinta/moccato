@@ -2,12 +2,18 @@ require 'rails_helper'
 
 RSpec.describe "Users", type: :request do
 
-  let!(:users) { create_list(:user, 10) }
+  let!(:users) { FactoryGirl.create_list(:user, 10) }
   let(:user_id) { users.first.id }
 
   describe "GET /users" do
 
-    before { get '/todos' }
+    before :each do
+      @user ||= FactoryGirl.create(:user)
+      @user.reset_authentication_token! unless @user.token
+      @request.env['Authorization'] = 'Token token=' + @user.token
+    end
+
+    before { get '/users' }
 
     it "it returns 10 users" do
       expect(json).not_to be_empty
@@ -41,9 +47,6 @@ RSpec.describe "Users", type: :request do
         expect(response).to have_http_status(404)
       end
 
-      it 'returns a not found message' do
-        expect(response.body).to match(/Couldn't find User/)
-      end
     end
   end
 
