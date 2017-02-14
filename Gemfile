@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+ruby "2.3"
 
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
@@ -6,7 +7,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.0.1'
-gem 'sqlite3'
 gem "pundit"
 gem 'puma', '~> 3.0'
 gem 'bcrypt', '~> 3.1.7'
@@ -16,8 +16,14 @@ gem 'delayed_job_active_record'
 gem 'paranoia'
 gem 'active_model_serializers', '~> 0.10.0'
 
+group :production do
+  gem 'pg'
+end
+
 group :development, :test do
+  gem 'sqlite3'
   gem 'pry-byebug'
+  gem 'simplecov'
   gem 'byebug', platform: :mri
   gem 'rspec-rails', '>= 3.5.0'
   gem 'factory_girl_rails'

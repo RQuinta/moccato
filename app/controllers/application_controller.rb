@@ -7,7 +7,13 @@ class ApplicationController < ActionController::API
   include ActionController::HttpAuthentication::Token
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
-  rescue_from ActiveRecord::RecordNotFound, with: :not_found
+  rescue_from ActiveRecord::RecordNotFound do |e|
+    json_response({ message: e.message }, :not_found)
+  end
+
+  rescue_from ActiveRecord::RecordInvalid do |e|
+    json_response({ message: e.message }, :unprocessable_entity)
+  end
 
   before_action :authenticate
 

@@ -4,20 +4,18 @@ RSpec.describe "Users", type: :request do
 
   let!(:users) { FactoryGirl.create_list(:user, 10) }
   let(:user_id) { users.first.id }
+  let(:admin) { FactoryGirl.create :admin }
 
   describe "GET /users" do
 
     before :each do
-      @user ||= FactoryGirl.create(:user)
-      @user.reset_authentication_token! unless @user.token
-      @request.env['Authorization'] = 'Token token=' + @user.token
+      get '/users', nil, :authorization => 'Token token=' + admin.token
     end
 
-    before { get '/users' }
-
     it "it returns 10 users" do
+      json = JSON.parse(response.body)
       expect(json).not_to be_empty
-      expect(json.size).to eq(10)
+      expect(json.size).to eq(11)
     end
 
     it 'returns status code 200' do
@@ -28,10 +26,14 @@ RSpec.describe "Users", type: :request do
 
   describe 'GET /users/:id' do
 
-    before { get "/users/#{user_id}" }
-
     context 'when the record exists' do
+
+      before :each do
+        get '/users/1', nil, :authorization => 'Token token=' + admin.token
+      end
+
       it 'returns the user' do
+        json = JSON.parse(response.body)
         expect(json).not_to be_empty
         expect(json['id']).to eq(user_id)
       end
@@ -42,6 +44,10 @@ RSpec.describe "Users", type: :request do
     end
 
     context 'when the record does not exist' do
+
+      before :each do
+        get '/users/100', nil, :authorization => 'Token token=' + admin.token
+      end
 
       it 'returns status code 404' do
         expect(response).to have_http_status(404)
