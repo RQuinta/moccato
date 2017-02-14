@@ -17,6 +17,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    authorize @user
     @user = User.new(user_params)
     if @user.save
       render json: @user, status: :created, location: @user
@@ -26,6 +27,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    authorize @user
     if @user.update(user_params)
       render json: @user
     else
@@ -34,6 +36,7 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    authorize @user
     if @user.destroy
       render json: @user, status: 204
     else
