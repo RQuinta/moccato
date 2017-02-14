@@ -24,6 +24,7 @@ Como usuário administrador devo poder listar todos os usuários deletados.
 Instalação API
 
 Comandos: 
+    
     Executar API pela primeira vez:
       bundle install
       rake db:create
